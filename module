@@ -1,0 +1,83 @@
+command:-   ng g m module_name --routing
+
+    under the module we have to create component by default it has standalone
+
+command:-    ng g c module_name/component_name
+
+ example:-    ng g m about --routing
+ it has two files
+about.routing.module.ts
+about.module.ts
+
+    ng g c about/company
+
+// component is standalone so no need to import in about.module.ts routing
+// about.module.ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AboutRoutingModule } from './about-routing.module';
+
+@NgModule({
+  declarations: [
+    
+  ],
+  imports: [
+    CommonModule,
+    AboutRoutingModule
+  ]
+})
+export class AboutModule {
+
+ }
+
+// routing is done of company component
+// about.routing.module.ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CompanyComponent } from './company/company.component';
+
+const routes: Routes = [
+  {path:'company',component:CompanyComponent}  //that
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class AboutRoutingModule { }
+
+
+// app.routes.ts
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+
+export const routes: Routes = [
+    {path:'',component:HomeComponent},
+    {path:'about',loadChildren:()=>import('./about/about.module').then(mod=>mod.AboutModule)} //lazy loading
+];
+
+// home.component.html
+
+<p>home works!</p>
+<a routerLink="about/company">click me</a>  //we use routerLink if we don't import in home.component.ts its gives errr routerlink is not known
+
+//home.component.ts
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router'; //here import the router link
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule,RouterLink], //here register the router link
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
+})
+export class HomeComponent {
+
+}
+
+
+
+
+
