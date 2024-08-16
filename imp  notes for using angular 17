@@ -1,0 +1,8 @@
+important notes:
+
+1- we have to add CommanModule in every component .ts file except app.component.ts file
+2- if we use routerLink in anchor tag then we have to import in component.ts file
+<a routerLink="about/company">click me</a>   we use router link in home.component.html file
+imports: [CommonModule,RouterLink],   now we have to import router link in home.component.ts or this is also the example of 
+import commasn module
+3- 
