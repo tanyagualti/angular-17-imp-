@@ -5,4 +5,8 @@ important notes:
 <a routerLink="about/company">click me</a>   we use router link in home.component.html file
 imports: [CommonModule,RouterLink],   now we have to import router link in home.component.ts or this is also the example of 
 import commasn module
-3- 
+3- in angular 17 not have app.module.ts file so all imports are done in app.component.ts file
+4- all routing are done in app.routes.ts file
+5- this  component  standalone is true
+
+
