@@ -1,0 +1,17 @@
+when we make services in angular17 command: ng g s folder_name/service_name
+
+example ng g s services/translation
+
+by this command two files are generated
+translation.service.ts
+translation.service.spec.ts
+
+
+no need to import globally of this service like a previous version in modulr.ts
+
+but need to import in where we want to use 
+like i want to use this service in home.component.ts so we have to 
+
+import {TranslationService} from '../services/translation.service';
+
+make the instance for calling there service methods
