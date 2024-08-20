@@ -1,0 +1,6 @@
+const words = ['spray', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter((word) => word.includes("spray"));
+
+console.log(result);
+ Expected output: Array ["spray"]
