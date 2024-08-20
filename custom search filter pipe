@@ -1,0 +1,32 @@
+ <input type="text" name="search" id="search" [(ngModel)]="searchtext" placeholder="Search..." />
+   yeh value phle input me likjhi jari then pipe me as a parameter searchTearm me fir flter method k sath ek ek word filter hoga aur search parameter me hr bar jo array ayga aur check hoga and then search me array auyga toh particullary decide kr lenge ki kis prtoperty k hisab s filter krna hai name k hisab s aur fir indexOf method use kr lenge (searchTearm) value k sath ki yeh value array me hai ya nhi
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filter',
+  standalone: true
+})
+export class FilterPipe implements PipeTransform {
+
+  transform(value:any[], searchTearm:string): any[] {
+  // value vo array indicate kr rha hai jo array s item search krna hai (array means jo product api me sb kuch pda hai)
+    // This parameter is the search text input by the user. It’s used to filter the items in the value array.
+    // searchTearm indiacte krta hai vo string jo user as a input dalnge aur filter hoga ki yeh string exist krta hai ya nhi us array me
+    // :any[] return the array after filtering  
+    return value.filter(function(search:any){
+      // filter is the predefined method   yeh vo wali value return krti hai jo after filter eist krti hai but iske parameter me condition ya koi function bhi likhna pdhta hai
+        return search.name.indexOf(searchTearm) > -1
+    });
+  }
+
+}
+
+
+  <tbody>
+            <tr *ngFor="let hero of heros | filter:searchtext">   //give search value as a parameter to pipe for further process
+                <td>{{ hero.id }}</td>
+                <td>{{ hero.name }}</td>
+                <td>{{ hero.country }}</td>
+            </tr>
+        </tbody>
