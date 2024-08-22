@@ -1,0 +1,14 @@
+# firstly understand this method logic in deeply
+
+# timer () is method which is from rxjs library  which returns observal
+# timer: This is a function from the rxjs library that creates an observable that emits values at specified time intervals.
+
+# The first parameter (0) specifies the initial delay in milliseconds before the first emission. (first parameter yeh decide krega ki first emit hone s phle kitne time ka delay hoga  gives in ms)
+# The second parameter (this.pollingInterval) specifies the interval in milliseconds between subsequent emissions. (yeh second parameter next ane wali emitions ka time interval decide krti hai)
+import { Observable, switchMap, timer } from 'rxjs';
+# you have to import that timer method from rsjs
+getData():Observable<any>{
+    return timer(0, this.pollingInterval).pipe(
+      switchMap(() => this.http.get<any>(this.apiUrl))
+    );
+  }
