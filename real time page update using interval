@@ -7,6 +7,10 @@
 # The second parameter (this.pollingInterval) specifies the interval in milliseconds between subsequent emissions. (yeh second parameter next ane wali emitions ka time interval decide krti hai)
 import { Observable, switchMap, timer } from 'rxjs';
 # you have to import that timer method from rsjs
+pipe is used for composing (work together) the more than one rsjs operators. (more detail in pipe file)
+
+switchMap is rsjx operartor which is flattening operator(means jo br br subscribe krne s bchata hai) and switchMap only consider the latest response previous response ko cancel kr deta hai
+timer bhi observal return krta hai aur http.get bhi but method ko call krte hue ek hi subsribe kr rhe hai do nhi bcs of switchmap vo flatenning operator do do subscribe krne s bchata hai
 getData():Observable<any>{
     return timer(0, this.pollingInterval).pipe(
       switchMap(() => this.http.get<any>(this.apiUrl))
