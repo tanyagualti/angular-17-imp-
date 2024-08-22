@@ -1,0 +1,30 @@
+(* pipe is a operator but it is used to apply other one or more than one operator use(compose) to according to your result need *)
+
+its use as a pipeline 
+(* The pipe operator is used to compose multiple RxJS operators together. These operators are functions that process or transform the data emitted by an observable. By using pipe, you can chain these operators in a sequence to achieve the desired outcome.*)
+(* Think of the pipe operator as a way to create a "pipeline" for your data. Just like you might have a series of steps in a factory assembly line, pipe allows you to define a series of operations that will be applied to your data as it flows through the observable.
+
+Here’s a simplified breakdown:
+
+Create an Observable: Start with an observable that emits values over time. For example, an observable that emits numbers or data from an API.
+
+Apply Operators: Use the pipe method to specify a series of operators that will process the emitted values. Each operator performs a specific transformation or filtering action.
+
+Subscribe: After the pipe operation is set up, you subscribe to the observable to receive the processed data.*)
+
+
+
+import { of } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+
+// Create an observable that emits numbers
+const numbers$ = of(1, 2, 3, 4, 5);
+
+// Use the pipe operator to transform the data
+const processedNumbers$ = numbers$.pipe( //one pipe operator
+  filter(x => x % 2 === 1), //this is also a rsjs operator first it check number is odd
+  map(x => x * 2)   //this is also rxjs operator second it double the value which is get from first operator         
+);//end their (this two operator work together by using pipe)
+(*ab observral mila hai use use krne k lie subscribe krnge  *)
+// Subscribe to the observable to see the results
+processedNumbers$.subscribe(result => console.log(result));
