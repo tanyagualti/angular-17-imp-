@@ -8,3 +8,10 @@ k sth hi work krta hai
 
 example: suppose hmne search box me likha :give some food name aur hmara mind change hua hmne searching bdal di aur likha give me some animal names so toh without switchmap vo dono dund k de dega but time lgega toh yeh shi nhi hai toh hum kya krte hai switchmap use krte hai aur purane request ko cancel krke new request ko hi value dete hai
 
+switchMap is an RxJS operator that takes a function as an argument. This function returns an observable. Whenever the source observable emits a value, switchMap subscribes to the new observable returned by the function and automatically cancels any previous subscriptions.
+
+ getData():Observable<any>{
+    return timer(0, this.pollingInterval).pipe(
+      switchMap(() => this.http.get<any>(this.apiUrl))
+    );
+  }
