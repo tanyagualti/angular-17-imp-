@@ -1,0 +1,10 @@
+# switchMap is flattering operator means do do bar subscribe krne s bchna mtlb observable k response me bhi agr hme observal milta hai toh hme dubara subscribe krna pdhta hai toh hum usse bch jate hai toh vo data hme directly de deta hai
+
+switchMap aur other flatering operator (map,concatemap etc)  me kya difference hai
+difference hai canceling effect(request ko cancel krna)
+yeh purane sare emission ki request ko cancel krta chalta hai aur new emission ki value 
+k sth hi work krta hai
+
+
+example: suppose hmne search box me likha :give some food name aur hmara mind change hua hmne searching bdal di aur likha give me some animal names so toh without switchmap vo dono dund k de dega but time lgega toh yeh shi nhi hai toh hum kya krte hai switchmap use krte hai aur purane request ko cancel krke new request ko hi value dete hai
+
