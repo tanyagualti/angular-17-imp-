@@ -1,0 +1,69 @@
+plzz read about subject first:-
+behaviour subject is same as subject buyt difference is we can initialize the bnehaviour subject  
+
+jo bhi value ap behaviour subject me initialize kr doge jo sb  jgh dikhayi dekhi toh iska banefit yeh hai ki app initial 
+value ko set krke rkh skte hai
+ example
+ service:
+ import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DesignutilityService {
+
+  cartCount=new BehaviorSubject<number>(0);  like that
+  constructor() { }
+}
+
+
+this component send data to service
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { MatModule } from '../appModules/mat.module';
+import { DesignutilityService } from '../services/designutility.service';
+
+@Component({
+  selector: 'app-dynamic',
+  standalone: true,
+  imports: [CommonModule,MatModule],
+  templateUrl: './dynamic.component.html',
+  styleUrl: './dynamic.component.css'
+})
+export class DynamicComponent {
+  count:number=0;
+  constructor(private service:DesignutilityService){}
+  onAdd(){
+    this.count=this.count+1;
+    this.service.cartCount.next(this.count);
+  }
+  onRemove(){
+    this.count=this.count-1;
+    this.service.cartCount.next(this.count);
+  }
+}
+
+this component re4ceive component from service
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { MatModule } from '../appModules/mat.module';
+import { DesignutilityService } from '../services/designutility.service';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, MatModule ],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
+})
+export class HomeComponent {
+cartItemCount:number|undefined;
+constructor(private service:DesignutilityService){
+  this.service.cartCount.subscribe((result)=>{
+    this.cartItemCount=result;
+  })
+}
+}
+
+
