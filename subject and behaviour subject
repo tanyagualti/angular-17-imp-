@@ -28,4 +28,36 @@ data receive krne k litye hum subscribe and next method dono use kr skte hai
 
 header.component.ts
 
+exclusive:boolean=false;
+  constructor(private sub:SubjectService){
+    this.sub.exclusive.subscribe(result=>{
+      this.exclusive = result;
+    })
+  }
 
+Purpose: HeaderComponent subscribes to the exclusive Subject from the SubjectService to react to changes and update its exclusive property accordingly.
+Subscription: The component subscribes to the exclusive subject and updates the exclusive property based on the received value.
+header component subject service s subscribe hai ab jo bhi value aygi service k pass aa jaygi aur service us cvalue koi kisi aur component ko tranfer kr skti hai
+
+
+
+ Acts as the intermediary or mediator that holds the Subject instance. It doesn't directly transfer data from one component to another but provides a shared Subject that can be used by multiple components to emit and listen to data.
+
+directly component to component data transfer nhi hota ek shared subject bnana pdhta hai bech me jo data share krwata hai ab suibject service subject component s data leke header component tk phuchaygi aur header component apna exclusive heading pr apply kregi
+
+
+Data Flow Breakdown
+From SubjectComponent to SubjectService:
+
+SubjectComponent calls this.ser.exclusive.next(true) when it is initialized.
+Later, SubjectComponent calls this.ser.exclusive.next(false) when it is destroyed.
+This means SubjectComponent pushes values (true or false) to the Subject in the SubjectService.
+
+From SubjectService to HeaderComponent:
+
+HeaderComponent subscribes to this.sub.exclusive (which is the Subject in SubjectService).
+Whenever the Subject emits a new value (either true or false), HeaderComponent receives this value through its subscription and updates its own exclusive property.
+
+hum data send krte hue next() method isliye use krte hai li uski value jitne bhi component subsribe kr rhe hai sbke pass phuch jaye3
+
+In SubjectComponent, the sendValue() method is called with true or false. This method internally calls this.exclusive.next(value), which pushes the value to all subscribers.
