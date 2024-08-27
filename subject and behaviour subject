@@ -1,0 +1,31 @@
+subject ka use data communication k liye hota hai from one copmponent to to other component'
+but sochne wali bat yeh hai ki data communiucation m @output and @input ka bhi use hota hai toh subject ki jrurt kyu pdhi
+but inka use sirf tb hota hai jb component me child aur parent ka relation ho tb output input ka use krskte hai
+otherwise hum subject ka use krnge
+
+
+now we have to discuss about subject?
+subject ek special type ka observable hai
+but why?
+
+subject same time pr observable bhi hai aur observer bhi hai  (subject s hum data subscribe bhi kr skte hai aur subscribe me hum data init bhi kr skte hai next bhi kr skte hai)
+
+observable(pipe,subscribe)
+observer(next,error,complete)
+
+subject bhi ek event emitor ki trh kam krta hai but iska kam event emittor ki trh limited nhi hai subbject me hum data init ki jgh next use krte hai
+but kam whi hai ek component s dusre component me data bhje yaa service k pass bhi data bhj skte hai
+
+export class SubjectService{
+exclusive=new Subject<boolean>;
+}
+
+Purpose: SubjectService provides a Subject named exclusive that other components can use to send and receive boolean values.
+Subject: This is an RxJS class that acts as both an Observable and an Observer. It allows components to push values (next()) and subscribe to receive values.
+
+data receive krne k litye hum subscribe and next method dono use kr skte hai
+
+
+header.component.ts
+
+
