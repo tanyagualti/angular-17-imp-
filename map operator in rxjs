@@ -1,0 +1,23 @@
+Map operator k through hum server (api) s  aye hue data ko change kr skte hai aur modify kr skte hai and then website pr use kr skte hai
+
+
+
+The map operator in RxJS is a fundamental transformation operator used to transform the items emitted by an observable. It allows you to apply a function to each item emitted by the source observable and return a new observable that emits the transformed items.
+
+getUserCount(): Observable<number> {
+  return this.http.get<User[]>(`${this.userUrl}`).pipe(
+    map(users => users.length) // Compute the count of users
+  );
+}
+
+apke pass ek observable get ho rha hai but apko vo User[] use nhi krna hai apko uski length chiye then in this we apply the array object into single number value
+
+HTTP Request:
+
+this.http.get<User[]>(${this.userUrl}) makes an HTTP GET request to fetch an array of users from the API endpoint. The response is an observable of type User[], which represents an array of User objects.
+Transformation with map:
+
+.pipe(map(users => users.length)) applies the map operator to the observable stream. This operator transforms the array of users (U
+
+The original observable emits an array of User objects. However, the requirement is to get the count of users, not the entire list. The map operator is used to transform this array into a single number representing its length. Without map, you would have to process
+the array elsewhere in your code, which would be less efficient and less clean.
