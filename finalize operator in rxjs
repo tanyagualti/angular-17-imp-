@@ -1,0 +1,23 @@
+The finalize operator is used to execute a function when an observable completes, either successfully or with an error. It allows you to perform some final cleanup or side effects after the observable has finished its work, 
+without altering the observable’s emitted values.
+
+import { finalize } from 'rxjs/operators';
+
+// Using finalize in an observable chain
+observable.pipe(
+  finalize(() => {
+    // Finalization logic here
+  })
+);
+
+
+Always Executed: The function passed to finalize is always executed, regardless of whether the observable completes successfully or encounters an error. This makes it ideal for cleanup operations such as hiding spinners or stopping loading indicators.
+
+Non-Blocking: The function executed by finalize does not affect the observable's data stream or error handling. It is purely for side effects and cleanup.
+
+Useful for Cleanup: Common use cases include stopping loaders, resetting state, or logging out actions.
+
+Example 
+  this.productData$=this.user.getProductData().pipe(
+      finalize(()=>this.spin=false)
+    );  spin means loader  i want that when  data get load spin will false thats why i use finalize operator bcz this operator always execute without effecting the data
