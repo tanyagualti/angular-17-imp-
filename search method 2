@@ -1,0 +1,53 @@
+//all code same as search method 1 in this only toggle button are change
+
+.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- <input type="text" name="search" id="search" [(ngModel)]="searchValue"> -->
+<!-- 
+    <select  [(ngModel)]="searchValue">
+        <option value="tennis">tennis</option>
+        <option value="badminton">badminton</option>
+        <option value="cricket">cricket</option>
+    </select> -->
+
+
+
+    <p>
+        <mat-button-toggle-group #grp="matButtonToggleGroup" name="fontStyle" aria-label="Font Style" [(ngModel)]="searchValue">
+            <mat-button-toggle value="tennis">Tennis</mat-button-toggle>
+            <mat-button-toggle value="badminton">Badminton</mat-button-toggle>
+            <mat-button-toggle value="cricket">Cricket</mat-button-toggle>
+        </mat-button-toggle-group>
+    </p>
+    
+
+
+@if(searchValue === ''){
+  <div>not found!!!</div> 
+}
+@else{
+    <table>
+        <thead>
+            
+            <th>values</th>
+            
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data | search:searchValue">
+            <td>{{item}}</td>
+           
+            </tr>
+        </tbody>
+    </table>
+}
+</body>
+</html>
+
