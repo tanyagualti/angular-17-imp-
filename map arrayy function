@@ -1,0 +1,15 @@
+const array1 = [
+  { name: 'Tanya', age: 20 },
+  { name: 'Manya', age: 30 }
+];
+
+const key = 'name'; // Key to access the property
+
+// Pass a function to map
+const map1 = array1.map(item => item[key]); // Use bracket notation
+const map2=array1.map(item=>item.age); if we have to aceess directly without using property we use . otherwise for property use brraket
+console.log(map1);// Output: ['Tanya', 'Manya']
+console.log(map2); 
+
+
+Array ["Tanya", "Manya"] Array [20, 30]
