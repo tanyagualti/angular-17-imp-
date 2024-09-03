@@ -29,3 +29,43 @@ if we search row we use filter and includes method
 </html>
 
 .ts
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { SportsService } from '../services/sports.service';
+import { Sports } from '../interfaces/sports';
+import { MatModule } from '../appModules/mat.module';
+import { FilterPipe } from '../pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-sport',
+  standalone: true,
+  imports: [CommonModule,FilterPipe,MatModule,FormsModule],
+  templateUrl: './sport.component.html',
+  styleUrl: './sport.component.css'
+})
+export class SportComponent {
+searchValue='';
+data!:string[];
+constructor(private sr:SportsService){
+  this.sr.getUser().subscribe((result)=>{
+    this.data=result;
+    console.log(this.data);
+  })
+}
+}
+
+filter pipe
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filter',
+  standalone: true
+})
+export class FilterPipe implements PipeTransform {
+  transform(items: any[], searchValue: string): any[] {
+    return items.filter(item => item.name.toLowerCase().includes(searchValue));
+isme yeh check krnge ki jo value hum search kr rhe hai vo item.name me include hai  bhi ya nhi hahi tooh show krwa denge
+  }
+}
+
