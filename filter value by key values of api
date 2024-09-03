@@ -1,0 +1,73 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filter',
+  standalone: true
+})
+export class FilterPipe implements PipeTransform {
+  transform(items: any[], key: string): any[] {  //hme items k liye parameter dalne ki jrurt nhi hoti ap jha filter pipe daloge vo apne ap le lega vo items jisk filter krna hai
+    if (!items || !key) {
+      return items;
+    }
+
+    it is use array function map() which modify the array value by making new array not modify original value
+    return items.map(item => ({
+      date: item.date,
+      value: item[key]
+    }));
+  }
+}
+
+
+
+.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.24/angular-material.min.css" rel="stylesheet">
+</head>
+<body>
+    <p>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="selectedValue">
+            <mat-button-toggle value="tennis">Tennis</mat-button-toggle>
+            <mat-button-toggle value="badminton">Badminton</mat-button-toggle>
+            <mat-button-toggle value="cricket">Cricket</mat-button-toggle>
+        </mat-button-toggle-group>
+    </p>
+    
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of data | filter:selectedValue">
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.value }}</td>
+                </tr>
+            </tbody>
+        </table>
+    
+</body>
+</html>
+
+
+.ts
+export class SportComponent {
+data:Sports[]=[];
+selectedValue = 'tennis';
+constructor(private sport:SportsService){
+  this.sport.getData().subscribe((result)=>{
+    this.data=result;
+    console.log(this.data);
+ });   
+
+}
+}
