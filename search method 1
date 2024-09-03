@@ -1,0 +1,43 @@
+search.component.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" name="search" id="search" [(ngModel)]="searchValue">
+<!-- 
+    <select  [(ngModel)]="searchValue">
+        <option value="tennis">tennis</option>
+        <option value="badminton">badminton</option>
+        <option value="cricket">cricket</option>
+    </select> -->
+
+
+
+
+@if(searchValue === ''){
+  <div>not found!!!</div> 
+}
+@else{
+    <table>
+        <thead>
+            
+            <th>values</th>
+            
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data | search:searchValue">
+            <td>{{item}}</td>
+           
+            </tr>
+        </tbody>
+    </table>
+}
+</body>
+</html>
+
+search.component.ts
