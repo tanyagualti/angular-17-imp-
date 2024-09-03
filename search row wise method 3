@@ -1,0 +1,31 @@
+if we want to search columns we use map method
+if we search row we use filter and includes method
+.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="search" id="search" [(ngModel)]="searchValue">
+    <table>
+        <thead>
+            <th>name</th>
+            <th>age</th>
+            <th>city</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data | filter:searchValue">
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.city}}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+.ts
