@@ -7,7 +7,7 @@ search.component.html
     <title>Document</title>
 </head>
 <body>
-    
+    we have to write the exact key value which is exist in api like tennis
     <input type="text" name="search" id="search" [(ngModel)]="searchValue">
 <!-- 
     <select  [(ngModel)]="searchValue">
@@ -40,4 +40,75 @@ search.component.html
 </body>
 </html>
 
+
 search.component.ts
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { SearchPipe } from '../pipes/search.pipe';
+import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { SportsService } from '../services/sports.service';
+import { Sports } from '../interfaces/sports';
+
+@Component({
+  selector: 'app-search',
+  standalone: true,
+  imports: [CommonModule,SearchPipe,FormsModule],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.css'
+})
+export class SearchComponent {
+searchValue:string='';
+data!:any[];
+constructor(private ser:SportsService){
+  this.ser.getData().subscribe(result=>{
+    this.data=result;
+  })
+}
+}
+
+
+
+search pipe
+import { Pipe, PipeTransform } from '@angular/core';
+import { Sports } from '../interfaces/sports';
+
+@Pipe({
+  name: 'search',
+  standalone: true
+})
+export class SearchPipe implements PipeTransform {
+
+  transform(value:any[],searchValue:string): Sports[] {
+
+    return value.map(result=>result[searchValue]);
+ 
+  }
+
+}
+
+
+
+api data
+{
+  "sports": [
+    {
+      "date": "2022-12-20",
+      "tennis": 20000,
+      "badminton": 3000,
+      "cricket": 4000
+    },
+    {
+      "date": "2023-01-15",
+      "tennis": 21000,
+      "badminton": 3200,
+      "cricket": 4200
+    },
+    {
+      "date": "2023-02-10",
+      "tennis": 21500,
+      "badminton": 3100,
+      "cricket": 4300
+    }
+  ]
+}
